@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  font-family: "Ubuntu", sans-serif;
+}
+body {
+  background-color: rgb(13, 13, 13);
+  overflow: hidden;
+}
+
+.loader {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  background-color: black;
+  z-index: 9999999999;
+}
+
+nav {
+  height: 100vh;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: -250px;
+  bottom: 0;
+  background-color: white;
+  display: flex;
+}
+nav i {
+  cursor: pointer;
+}
+nav .nav-Btn {
+  padding: 15px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 60px;
+}
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: rgb(13, 13, 13);
+  padding: 30px 20px;
+  width: 250px;
+}
+.nav-links footer {
+  align-self: flex-end;
+}
+.nav-links .links {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+.nav-links .links li {
+  color: white;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transform: translatey(250px);
+  transition: all 1.5s;
+}
+
+#main form input::placeholder {
+  color: gray;
+}
+
+#meal {
+  background-color: rgb(13, 13, 13);
+  display: flex;
+}
+#closeMeal {
+  top: 20px;
+  right: 10%;
+  width: 20px;
+  cursor: pointer;
+}
+
+.item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  bottom: -200px;
+  height: 50%;
+  transition: all 0.5s;
+}
+
+.item:hover .layer {
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+#main {
+  padding-left: 60px;
+}
