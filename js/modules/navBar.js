@@ -15,20 +15,22 @@ import {
 
 let search = `
 <form>
-  <div class="form-group d-flex justify-content-center">
-    <input
-      id="byMeal"
-      class="form-control me-2 mt-4 w-50 bg-transparent text-light"
-      placeholder="Search By Name"
-      type="text"
-    />
-    <input
-      id="byLitter"
-      class="form-control me-2 mt-4 w-50 bg-transparent text-light"
-      placeholder="Search By First Litter"
-      maxlength="1"
-      type="text"
-    />
+  <div class="container-fluid" >
+  <div class="row">
+  <div class="col-md-6"><input
+  id="byMeal"
+  class="form-control me-2 mt-4  bg-transparent text-light"
+  placeholder="Search By Name"
+  type="text"
+/></div>
+  <div class="col-md-6"> <input
+  id="byLitter"
+  class="form-control me-2 mt-4  bg-transparent text-light"
+  placeholder="Search By First Litter"
+  maxlength="1"
+  type="text"
+/></div>
+  </div>
   </div>
 </form>
 `;
@@ -36,7 +38,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
 <form class="mx-auto w-75 text-center">
   <h2 class="text-start mb-3">Contact Us.....</h2>
   <div class="row gy-2">
-    <div class="form-group w-50">
+    <div class="col-md-6">
       <input
         id="name"
         placeholder="Enter your Name"
@@ -46,7 +48,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
       />
       <p class="alert alert-danger d-none"></p>
     </div>
-    <div class="form-group w-50">
+    <div class="col-md-6">
       <input
         id="email"
         placeholder="Enter your Email"
@@ -56,7 +58,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
       />
       <p class="alert alert-danger d-none"></p>
     </div>
-    <div class="form-group w-50">
+    <div class="col-md-6">
       <input
         id="phone"
         placeholder="Enter your Phone"
@@ -66,7 +68,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
       />
       <p class="alert alert-danger d-none"></p>
     </div>
-    <div class="form-group w-50">
+    <div class="col-md-6">
       <input
         id="age"
         placeholder="Enter your Age"
@@ -76,7 +78,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
       />
       <p class="alert alert-danger d-none"></p>
     </div>
-    <div class="form-group w-50">
+    <div class="col-md-6">
       <input
         id="password"
         placeholder="Enter your Password"
@@ -86,7 +88,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
       />
       <p class="alert alert-danger d-none"></p>
     </div>
-    <div class="form-group w-50">
+    <div class="col-md-6">
       <input
         id="repassword"
         placeholder="RePassword"
@@ -97,7 +99,7 @@ let formContact = `<div class="d-flex align-items-center vh-100 text-light">
       <p class="alert alert-danger d-none"></p>
     </div>
   </div>
-  <button id="submit" class="btn btn-primary btn-lg mt-3">Submit</button>
+  <button id="submit" type="button" class="btn btn-primary disabled btn-lg mt-3">Submit</button>
 </form>
 </div>`;
 
@@ -106,6 +108,7 @@ export default (function () {
   $("#home")
     .css({ cursor: "pointer" })
     .click(async function () {
+      closeNav();
       $(document).ready(async function () {
         let result = await searchByName("");
         let box = displayMeal(result);
@@ -119,11 +122,13 @@ export default (function () {
           $("#main").removeClass("d-none");
         }
       });
+      CloseData();
     });
 
   // .....................Search Bar..............
   $("#search").click(function () {
     closeNav();
+    CloseData();
     $("#main ").empty().html("<div class='container'></div>");
     $("#main .container").before(`<div class="w-75 mx-auto ">${search}</div> `);
 
@@ -148,6 +153,7 @@ export default (function () {
   $("#Categories").click(async function () {
     $(".loader").css({ display: "flex", zIndex: "999" });
     closeNav();
+    CloseData();
     let Categories = await SearchBycategories();
     $("#main ").empty().html("<div class='container'></div>");
     $("#main .container ").html(
@@ -170,6 +176,7 @@ export default (function () {
   $("#Area").click(async function () {
     $(".loader").css({ display: "flex", zIndex: "999" });
     closeNav();
+    CloseData();
     let areas = await searchBy("a", displayArea);
     $("#main ").empty().html("<div class='container'></div>");
     $("#main .container ").html(`<div class="row mt-3 g-3">${areas}</div>`);
@@ -189,6 +196,7 @@ export default (function () {
   $("#Ingredients").click(async function () {
     $(".loader").css({ display: "flex", zIndex: "999" });
     closeNav();
+    CloseData();
     let Ingredients = await searchBy("i", displayIngredients);
     $("#main ").empty().html("<div class='container'></div>");
     $("#main .container ").html(
@@ -208,6 +216,7 @@ export default (function () {
   // ................... Contact...........
   $("#Contact").click(function () {
     closeNav();
+    CloseData();
     $("#main").html("<div class='container'></div>");
     $("#main .container ").html(formContact);
     formControl();
@@ -234,4 +243,11 @@ function closeNav() {
   $(".nav-links .links li ").css({ transform: "translatey(250px)" });
   $("#closeNav").addClass("d-none");
   $("#openNav").removeClass("d-none");
+}
+
+function CloseData() {
+  if ($("#meal").hasClass("d-none") == false) {
+    $("#meal").addClass("d-none");
+    $("#main").removeClass("d-none");
+  }
 }

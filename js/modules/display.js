@@ -123,6 +123,8 @@ async function searchInIngredaienst(term) {
 // .............................Contact us Nav..................
 function formControl() {
   $("#name").on("input", function () {
+    let that = $(this);
+    valid(that);
     let regex = /^[a-zA-Z ]{3,20}$/gm;
     if (regex.test(this.value) == false) {
       $(this)
@@ -134,6 +136,8 @@ function formControl() {
     }
   });
   $("#email").on("input", function () {
+    let that = $(this);
+    valid(that);
     let regex = /^[\w]{6,}\@[a-z]{4,}(\.com){1}$/gm;
     if (regex.test(this.value) == false) {
       $(this)
@@ -145,6 +149,8 @@ function formControl() {
     }
   });
   $("#phone").on("input", function () {
+    let that = $(this);
+    valid(that);
     let regex = /^01(0|1|2|5)\d{8}$/gm;
     if (regex.test(this.value) == false) {
       $(this).next().text("Enter valid Phone Number").removeClass("d-none");
@@ -153,6 +159,8 @@ function formControl() {
     }
   });
   $("#age").on("input", function () {
+    let that = $(this);
+    valid(that);
     let regex = /^[1-9][0-9]$/gm;
     if (regex.test(this.value) == false) {
       $(this).next().text("Enter valid age").removeClass("d-none");
@@ -161,6 +169,8 @@ function formControl() {
     }
   });
   $("#password").on("input", function () {
+    let that = $(this);
+    valid(that);
     let regex = /^[A-Z]{1}[0-9]{1}\w{6,15}$/;
     if (regex.test(this.value) == false) {
       $(this)
@@ -174,6 +184,8 @@ function formControl() {
     }
   });
   $("#repassword").on("input", function () {
+    let that = $(this);
+    valid(that);
     if ($("#repassword").val() != $("#password").val()) {
       $(this).next().text("Enter valid repassword").removeClass("d-none");
     } else {
@@ -460,6 +472,35 @@ function titleDisplay(object) {
   });
 }
 
+// ..........................valid Submit
+function valid(element) {
+  element.on("change", function () {
+    let allInputs = $(this).parent().siblings("div").children("input");
+    let allP = $(this).parent().siblings("div").children("p");
+    let x = validInputs(allInputs);
+    let y = validParag(allP);
+    if (x && y) {
+      $("#submit").removeClass("disabled");
+    } else $("#submit").addClass("disabled");
+  });
+}
+function validInputs(arra) {
+  for (const input of arra) {
+    if (input.value == "") {
+      return false;
+    }
+  }
+  return true;
+}
+
+function validParag(arra) {
+  for (const p of arra) {
+    if (p.classList.contains("d-none") == false) {
+      return false;
+    }
+  }
+  return true;
+}
 // .................................export.......................
 export {
   searchByName,
